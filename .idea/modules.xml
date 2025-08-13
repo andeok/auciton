@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/auction.jjust.iml" filepath="$PROJECT_DIR$/auction.jjust.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auction.iml" filepath="$PROJECT_DIR$/auction.iml" />
     </modules>
   </component>
 </project>
