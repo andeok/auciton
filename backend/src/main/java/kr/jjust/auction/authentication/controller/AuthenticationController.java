@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
-    @GetMapping("/login/{oauth2Type}")
+    @PostMapping("/login/{oauth2Type}")
     public ResponseEntity<LoginInfomationResponse> login (
         @PathVariable String oauth2Type,
         @RequestBody @Valid LoginTokenRequest request
