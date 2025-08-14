@@ -15,10 +15,8 @@ const KakaoRedirectPage = () => {
             code: code,
             redirectUri: "http://localhost:5173/oauth/redirected/kakao" // 카카오 로그인 후 리다이렉트할 URI
           }
-          console.log(request);
             const response = await axios.post('http://localhost:8080/oauth2/login/kakao', request);
             const data = response.data; // 응답 데이터
-            alert("로그인 성공: " + data)
             navigate("/success");
         } catch (error) {
             navigate("/fail");
@@ -28,7 +26,6 @@ const KakaoRedirectPage = () => {
         const searchParams = new URLSearchParams(location.search);
         const code = searchParams.get('code');  // 카카오는 Redirect 시키면서 code를 쿼리 스트링으로 준다.
         if (code) {
-            alert("CODE = " + code)
             handleOAuthKakao(code);
         }
     }, [location]);
