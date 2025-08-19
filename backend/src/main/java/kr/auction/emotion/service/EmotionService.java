@@ -1,10 +1,7 @@
 package kr.auction.emotion.service;
 
+
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import kr.auction.emotion.dto.request.AiFeedbackRequest;
 import kr.auction.emotion.dto.request.EmotionSaveRequest;
 import kr.auction.emotion.dto.response.AiFeedbackResponse;
@@ -12,6 +9,8 @@ import kr.auction.emotion.repository.EmotionRepository;
 import kr.auction.emotion.service.gemini.GeminiClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -24,18 +23,19 @@ public class EmotionService {
 	@Transactional
 	public Long save(EmotionSaveRequest request) {
 
-		String text = "너는 유명한 심리상담가야. 나는 매일 감정일기를 작성중이야."
-			+ "다음 //기호 뒤에 내가 생각한 감정 점수와 감정 내용을 적을거야. 점수는 낮을수록 기분이 좋지 않은거라고 판단해."
-			+ "너는 그걸 판단해서 너가 생각한 점수를 알려주고 300자 이내로 조언이나 격려, 따끔한 충고를 해줘."
-			+ "너가 나에게 전달해줄 양식은 점수 : x점, 내용 : 내용 이렇게 보내줘"
-			+ "// 나의 점수 : " + request.myScore() + ", " + request.content();
+        String text = "너는 내 이야기를 깊이 공감해주고, 내 편이 되어주는 따뜻한 심리 상담가야. "
+            + "판단하거나 비난하지 않고, 내 감정을 최우선으로 존중해줘. //기호 다음에 내 이야기를 적을게."
+            + "//" + request.content()
+            + "일기의 내용을 항상 처음 본다 생각하고 얘기를 듣고 공감해줘. "
+            + "화가나는 일에는 같이 화내주고 충고가 필요한 일에는 충고를 해줘. 내용은 200자 내외로 해줘.";
 
-		AiFeedbackRequest.Part part = new AiFeedbackRequest.Part(text);
+        AiFeedbackRequest.Part part = new AiFeedbackRequest.Part(text);
 		AiFeedbackRequest.Content content = new AiFeedbackRequest.Content(List.of(part));
 		AiFeedbackRequest geminiRequest = new AiFeedbackRequest(List.of(content));
 
 		AiFeedbackResponse aiFeedback = aiFeedbackClient.getAiFeedback(geminiRequest);
 
+        log.info("aiFeedback: {}", aiFeedback);
 
 		return null;
 	}
