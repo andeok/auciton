@@ -24,5 +24,7 @@ public class DBInitializer implements CommandLineRunner {
 	public void createUser() {
 		User user = new User("test@test.com", "123qwe", "nick-test", UserType.USER);
 		userService.createUser(user);
+		User user1 = new User("test1@test.com", "123qwe", "nick", UserType.USER);
+		userService.createUser(user1);
 	}
 }

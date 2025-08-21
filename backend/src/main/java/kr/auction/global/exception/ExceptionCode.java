@@ -15,12 +15,12 @@ public enum ExceptionCode {
 	OPTION_INVALID(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR, "잘못된 옵션 ID입니다."),
 	OPTION_DUPLICATED(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR, "중복된 옵션이 존재합니다."),
 
-	// Question
-	CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, ClientExceptionCode.QUESTION_ERROR, "카테고리 ID가 존재하지 않습니다"),
-	QUESTION_ID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ClientExceptionCode.QUESTION_ERROR,
-		"중복된 질문 ID가 존재해 질문을 생성할 수 없습니다."),
-	QUESTION_HIGHLIGHT_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ClientExceptionCode.CHECKLIST_SERVER_ERROR,
-		"잘못된 하이라이트 키워드가 존재해 질문을 생성할 수 없습니다."),
+	// Bid
+	BID_NOT_FOUND(HttpStatus.BAD_REQUEST, ClientExceptionCode.QUESTION_ERROR, "카테고리 ID가 존재하지 않습니다"),
+	BID_PRICE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ClientExceptionCode.QUESTION_ERROR,
+		"입찰 금액이 잘못됐습니다."),
+	BID_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ClientExceptionCode.CHECKLIST_SERVER_ERROR,
+		"연속 입찰을 할 수 없습니다."),
 	QUESTION_INVALID(HttpStatus.BAD_REQUEST, ClientExceptionCode.QUESTION_ERROR, "잘못된 질문 ID입니다."),
 	QUESTION_DUPLICATED(HttpStatus.BAD_REQUEST, ClientExceptionCode.QUESTION_ERROR, "중복된 질문이 존재합니다."),
 	QUESTION_DIFFERENT(HttpStatus.BAD_REQUEST, ClientExceptionCode.QUESTION_ERROR, "수정할 질문 목록이 기존의 질문 목록과 동일하지 않습니다."),
@@ -47,14 +47,10 @@ public enum ExceptionCode {
 	// Answer
 	ANSWER_INVALID(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR, "답변이 유효하지 않습니다."),
 
-	// Checklist
-	CHECKLIST_NOT_FOUND(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_NOT_FOUND, "체크리스트가 존재하지 않습니다."),
-	CHECKLIST_MEMO_INVALID_LENGTH(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR,
-		"체크리스트 메모는 1000자 이하여야 합니다."),
-	CHECKLIST_NOT_OWNED_BY_USER(HttpStatus.UNAUTHORIZED, ClientExceptionCode.UNAUTH_ERROR, "유저의 체크리스트가 아닙니다."),
-	CHECKLIST_COMPARE_INVALID_COUNT(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_COMPARE_ERROR,
-		"체크리스트 비교는 2개만 가능합니다."),
-
+	// Auction
+	AUCTION_NOT_FOUND(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_NOT_FOUND, "경매가 존재하지 않습니다."),
+	AUCTION_NOT_OWNED_BY_USER(HttpStatus.UNAUTHORIZED, ClientExceptionCode.UNAUTH_ERROR, "유저의 체크리스트가 아닙니다."),
+	
 	// CustomChecklist
 	CUSTOM_CHECKLIST_QUESTION_EMPTY(HttpStatus.BAD_REQUEST, ClientExceptionCode.CUSTOM_ERROR, "커스텀 질문 개수가 유효하지 않습니다."),
 	CUSTOM_CHECKLIST_NOT_FOUND(HttpStatus.BAD_REQUEST, ClientExceptionCode.CUSTOM_ERROR, "커스텀 질문이 존재하지 않습니다."),
@@ -77,7 +73,6 @@ public enum ExceptionCode {
 	// Room
 	ROOM_FLOOR_AND_LEVEL_INVALID(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR,
 		"방이 지상층일 경우에만 층수를 입력할 수 있습니다."),
-
 
 	// OccupancyMonth
 	OCCUPANCY_MONTH_INVALID(HttpStatus.BAD_REQUEST, ClientExceptionCode.CHECKLIST_ERROR,
@@ -131,8 +126,7 @@ public enum ExceptionCode {
 	// Image
 	IMAGE_OPTIMIZE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ClientExceptionCode.IMAGE_ERROR, "이미지 최적화 중 오류가 발생하였습니다."),
 
-	;
-
+;
 	private final HttpStatus httpStatus;
 	private final ClientExceptionCode clientExceptionCode;
 	private final String message;
