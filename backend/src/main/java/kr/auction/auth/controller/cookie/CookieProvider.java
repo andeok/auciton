@@ -23,10 +23,10 @@ public class CookieProvider {
 	private final String refreshTokenPath;
 
 	public CookieProvider(JwtTokenProperties jwtTokenProperties,
-		@Value("${domain}") String domain,
-		@Value("${sameSite}") String sameSite,
-		@Value("${access-token-path}") String accessTokenPath,
-		@Value("${refresh-token-path}") String refreshTokenPath) {
+		@Value("${cookie.domain}") String domain,
+		@Value("${cookie.sameSite}") String sameSite,
+		@Value("${cookie.access-token-path}") String accessTokenPath,
+		@Value("${cookie.refresh-token-path}") String refreshTokenPath) {
 		this.jwtTokenProperties = jwtTokenProperties;
 		this.domain = domain;
 		this.sameSite = sameSite;

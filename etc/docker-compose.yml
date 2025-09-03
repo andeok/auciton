@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+
+  app:
+    build: .
+    restart: always
+    environment:
+      MYSQL_USERNAME: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "8080:8807"
+    # profiles, secrets 등 필요한 환경변수 추가
+    # command: ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]
+
+volumes:
+  db_data:
