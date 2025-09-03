@@ -35,7 +35,7 @@ public class User extends BaseEntity {
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private UserType userType;
+	private UserType userType = UserType.USER;
 
 	public User(String email, String password, String nickname) {
 		this.email = new Email(email);
