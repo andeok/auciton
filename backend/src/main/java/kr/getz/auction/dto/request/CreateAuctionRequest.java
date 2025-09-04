@@ -12,14 +12,12 @@ public record CreateAuctionRequest(
 	int startPrice,
 	int endPrice,
 	LocalDateTime startTime,
-	LocalDateTime endTime
+	LocalDateTime endTime,
+	int bidIncrement
 ) {
 
 	public Auction toAuction(Product product) {
-		return new Auction(title, startPrice, endPrice, startTime, endTime, product);
+		return new Auction(title, description, startPrice, endPrice, startTime, endTime, bidIncrement, product);
 	}
 
-	public Product toProduct(User user){
-		return new Product(title, description, user);
-	}
 }

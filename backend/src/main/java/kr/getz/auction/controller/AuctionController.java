@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.getz.auction.dto.request.AuctionWithProductRequest;
 import kr.getz.auction.dto.request.BidRequest;
 import kr.getz.auction.dto.request.CreateAuctionRequest;
 import kr.getz.auction.dto.response.AuctionResponse;
@@ -29,7 +30,7 @@ public class AuctionController {
 	// 경매 등록
 	@PostMapping
 	public ResponseEntity<Void> createAuction(@UserPrincipal User user,
-		@RequestBody CreateAuctionRequest request) {
+		@RequestBody AuctionWithProductRequest request) {
 
 		long auctionId = auctionService.createAuction(user, request);
 

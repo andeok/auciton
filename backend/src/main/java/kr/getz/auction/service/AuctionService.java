@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.validation.Valid;
 import kr.getz.auction.domain.Auction;
+import kr.getz.auction.dto.request.AuctionWithProductRequest;
 import kr.getz.auction.dto.request.BidRequest;
-import kr.getz.auction.dto.request.CreateAuctionRequest;
 import kr.getz.auction.dto.response.AuctionResponse;
 import kr.getz.auction.dto.response.AuctionsResponse;
 import kr.getz.auction.dto.response.AuctionsResponses;
@@ -31,12 +30,12 @@ public class AuctionService {
 	private final BidRepository bidRepository;
 
 	@Transactional
-	public long createAuction(User user, @Valid CreateAuctionRequest request) {
+	public long createAuction(User user, AuctionWithProductRequest request) {
 
-		Product product = request.toProduct(user);
+		Product product = request.product().toProduct(user);
 		Product saveProduct = productRepository.save(product);
 
-		Auction auction = request.toAuction(saveProduct);
+		Auction auction = request.auction().toAuction(saveProduct);
 		Auction saveAuction = auctionRepository.save(auction);
 
 		return saveAuction.getId();

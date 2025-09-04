@@ -36,11 +36,13 @@ public class Auction extends BaseEntity {
 	private Long id;
 
 	private String title; // 경매 제목
+	private String description;
 	private int startPrice;
 	private int endPrice;
 	private int currentPrice;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
+	private int bidIncrement; // 호가
 
 	@Enumerated(EnumType.STRING)
 	private AuctionStatus status; // 경매 상태
@@ -52,13 +54,15 @@ public class Auction extends BaseEntity {
 	@OneToMany(mappedBy = "auction", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Bid> bids = new ArrayList<>();
 
-	public Auction(String title, int startPrice, int endPrice, LocalDateTime startTime, LocalDateTime endTime, Product product) {
+	public Auction(String title, String description, int startPrice, int endPrice, LocalDateTime startTime, LocalDateTime endTime, int bidIncrement, Product product) {
 		this.title = title;
+		this.description = description;
 		this.startPrice = startPrice;
 		this.endPrice = endPrice;
 		this.currentPrice = startPrice;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.bidIncrement = bidIncrement;
 		this.product = product;
 		this.status = LocalDateTime.now().isAfter(startTime) ? AuctionStatus.ONGOING : AuctionStatus.SCHEDULED;
 	}
